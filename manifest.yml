@@ -1,0 +1,5 @@
+---
+applications:
+- name:    kanchan-nimapdemo-node
+  random-route: true
+  memory:  128M

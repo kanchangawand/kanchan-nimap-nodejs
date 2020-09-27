@@ -1,0 +1,21 @@
+{
+  "name": "nodejs-nimap",
+  "version": "1.0.0",
+  "description": "Nodejs pagination with crud operation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": "",
+  "author": "Kanchan Sahne",
+  "license": "ISC",
+  "dependencies": {
+    "body-parse": "^0.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0",
+    "pg": "^8.3.3",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.3"
+  }
+}
