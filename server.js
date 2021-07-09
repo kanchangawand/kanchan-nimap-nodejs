@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 var cfenv = require("cfenv")
 
-var appEnv = cfenv.getAppEnv()
+var appEnv = cfenv.getAppEnv();
+
+var port = appEnv.port || 3000;
 
 var bodyParser = require('body-parser');
  
@@ -30,15 +32,9 @@ app.use(bodyParser.json());
 app.use('/', router);
 
 // Create a Server
-const server = app.listen(3000, function () {
- 
-  let host = server.address().address
-  let port = server.address().port
- 
-  console.log("App listening at http://%s:%s", host, port); 
-})
 
-// app.listen(appEnv.port, appEnv.bind, function() {
-//   console.log("server starting on " + appEnv.url)
-//   console.log("server starting on port" + appEnv.port)
-// })
+
+app.listen(port, appEnv.bind, function() {
+  console.log("server starting on " + appEnv.url)
+  console.log("server starting on port" + port)
+})
