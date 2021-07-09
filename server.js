@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+var cfenv = require("cfenv")
+
+var appEnv = cfenv.getAppEnv()
 
 var bodyParser = require('body-parser');
  
@@ -34,3 +37,8 @@ const server = app.listen(3000, function () {
  
   console.log("App listening at http://%s:%s", host, port); 
 })
+
+// app.listen(appEnv.port, appEnv.bind, function() {
+//   console.log("server starting on " + appEnv.url)
+//   console.log("server starting on port" + appEnv.port)
+// })

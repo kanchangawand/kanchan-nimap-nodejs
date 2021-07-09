@@ -1,0 +1,6 @@
+---
+applications:
+- name:    nimapservice
+  memory:  128M
+  health-check-type: process
+  command: node server.js
