@@ -33,7 +33,6 @@ app.use('/', router);
 
 // Create a Server
 
-
 app.listen(port, appEnv.bind, function() {
   console.log("server starting on " + appEnv.url)
   console.log("server starting on port" + port)
