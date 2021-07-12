@@ -48,8 +48,7 @@ exports.findAll = (req, res) => {
 
 // Update a category by the id in the request
 exports.update = (req, res) => {
-  
-    console.log("req "+ JSON.stringify(req.body));
+      console.log("req "+ JSON.stringify(req.body));
     const id = req.params.id;
     console.log("id "+ id);
 

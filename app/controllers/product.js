@@ -46,6 +46,24 @@ exports.findAll = (req, res) => {
 };
 
 
+
+// Retrieve all Categories from the database.
+exports.findbyId = (req, res) => {
+  const id = req.params.id;
+Product.findOne({
+    where: { id: id }
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).json({
+        message:
+          err.message || "Some error occurred while retrieving products."
+      });
+    });
+};
+
 //upsert a Product 
 
 exports.upsert = (req, res) => {
@@ -142,7 +160,6 @@ exports.update = (req, res) => {
 
 // Delete a Product with the specified id in the request
 exports.delete = (req, res) => {
-
   const id = req.params.id;
 
   Product.destroy({
@@ -168,6 +185,34 @@ exports.delete = (req, res) => {
 
 };
 
+
+// Delete a Product with the specified id in the request
+exports.deleteAll = (req, res) => {
+  const id = req.params.id;
+
+  Product.destroy({
+    where: { },
+    truncate: true
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Product was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete Product with id=${id}. Maybe Product was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Product with id=" + id
+      });
+    });
+
+
+};
 const getPagingData = (data, page, limit) => {
   const { count: totalItems, rows: products } = data;
   const currentPage = page ? +page : 0;
