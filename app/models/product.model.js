@@ -9,10 +9,9 @@ module.exports = (sequelize, Sequelize) => {
 			type: Sequelize.STRING
 	  },
 	  categoryId: {
-		  type: Sequelize.INTEGER
-  	},categoryName: {
-        type: Sequelize.STRING
-    }
+		type: Sequelize.INTEGER,
+		allowNull: false
+	  }
 
 	});
 	
