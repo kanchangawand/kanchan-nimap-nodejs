@@ -1,6 +1,7 @@
 
 const db = require('../config/db.config.js');
 const Product = db.Product;
+const Category = db.Category;
 const Sequelize = db.Sequelize;
 
 
@@ -11,7 +12,7 @@ exports.create = (req, res) => {
     // Building product object from upoading request's body
     product.productName = req.body.productName;
     product.categoryId = req.body.categoryId;
-    product.categoryName = req.body.categoryName;
+   // product.categoryName = req.body.categoryName;
 
 
     // Save to MySQL database
@@ -30,11 +31,18 @@ exports.create = (req, res) => {
   }
 }
 
-// Retrieve all Categories from the database.
+// Retrieve all Product from the database.
 exports.findAll = (req, res) => {
 
-  Product.findAll()
+  Product.findAll({
+    include: [
+      {
+        model: db.Category,
+
+      }
+    ]})
     .then(data => {
+      console.log("data "+JSON.stringify(data));
       res.send(data);
     })
     .catch(err => {
@@ -103,7 +111,7 @@ exports.upsert = (req, res) => {
           // Building product object from upoading request's body
           product.productName = req.body.productName;
           product.categoryId = req.body.categoryId;
-          product.categoryName = req.body.categoryName;
+       //   product.categoryName = req.body.categoryName;
 
 
           // Save to MySQL database
@@ -236,8 +244,9 @@ exports.pagingOfProduct =  (req, res) => {
     const { limit, offset } = getPagination(page, size);
 
 
-    Product.findAndCountAll({ limit, offset,where: {} })
+    Product.findAndCountAll({ limit, offset,where: {}, include: [db.Category] })
     .then(data => {
+      console.log("data for pagination"+ JSON.stringify(data));
       const response = getPagingData(data, page, limit);
       res.send(response);
     })
